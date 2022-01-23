@@ -1,0 +1,41 @@
+{
+  "name": "adrianvellamlt.github.io",
+  "version": "1.0.0",
+  "description": "Portfolio Website",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "tscw": "tsc --watch",
+    "wp": "webpack",
+    "wpw": "webpack --watch",
+    "serve": "http-server build",
+    "build": "webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrianvellamlt/adrianvellamlt.github.io.git"
+  },
+  "keywords": [
+    "portfolio",
+    "adrianvellamlt"
+  ],
+  "author": "Adrian Vella",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adrianvellamlt/adrianvellamlt.github.io/issues"
+  },
+  "homepage": "https://github.com/adrianvellamlt/adrianvellamlt.github.io#readme",
+  "devDependencies": {
+    "css-loader": "^6.5.1",
+    "http-server": "^14.1.0",
+    "mini-css-extract-plugin": "^2.5.2",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "@types/es6-promise": "^3.3.0"
+  }
+}
