@@ -1,12 +1,17 @@
 const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     plugins: [
-        new MiniCssExtractPlugin({ filename: '[name].css' })
+        new CopyPlugin({ 
+            patterns: [ { from: "src/css", to: "css" } ],
+            options: {
+                concurrency: 100
+            }
+        })
     ],
     entry: {
-        'app': './src/app.ts'
+        app: './src/app.ts'
     },
     mode: "development",
     module: {
@@ -14,10 +19,6 @@ module.exports = {
             {
                 use: 'ts-loader',
                 exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"]
             }
         ]
     },
@@ -30,7 +31,7 @@ module.exports = {
     //   is resolved relative to this directory
     target: "web", // enum,
     resolve: {
-        extensions: ['.ts', '.js', '.css']
+        extensions: ['.ts', '.js']
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
