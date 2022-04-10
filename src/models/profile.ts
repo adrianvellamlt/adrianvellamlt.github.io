@@ -10,6 +10,7 @@ export default class Profile {
     readonly currentLocation: string;
     readonly emails: Array<ProfileEmail>;
     readonly urls: Array<ProfileUrl>;
+    readonly ims: Array<ProfileIM>;
 
     constructor(
         preferredUsername: string,
@@ -20,7 +21,8 @@ export default class Profile {
         aboutMe: string,
         currentLocation: string,
         emails: Array<ProfileEmail>,
-        urls: Array<ProfileUrl>
+        urls: Array<ProfileUrl>,
+        ims: Array<ProfileIM>
     ) {
         this.preferredUsername = preferredUsername;
         this.thumbnailUrl = thumbnailUrl;
@@ -31,19 +33,48 @@ export default class Profile {
         this.currentLocation = currentLocation;
         this.emails = emails;
         this.urls = urls;
+        this.ims = ims;
     }
 
     public static async Get() {
         const response = await fetch(Config.gravatarUrl);
 
-        const gravatarProfile = await response.json();
+        const gravatarProfileJson = await response.json();
 
-        return gravatarProfile.entry[0] as Profile;
+        if (gravatarProfileJson.entry.length === 0) return undefined;
+
+        const gravatarProfile = gravatarProfileJson.entry[0] as Profile;
+
+        return new Profile(
+            gravatarProfile.preferredUsername,
+            gravatarProfile.thumbnailUrl,
+            gravatarProfile.photos,
+            gravatarProfile.name,
+            gravatarProfile.displayName,
+            gravatarProfile.aboutMe,
+            gravatarProfile.currentLocation,
+            gravatarProfile.emails,
+            gravatarProfile.urls,
+            gravatarProfile.ims
+        );
+    }
+
+    GetThumbnail(size?: number) {
+        for (const photo of this.photos)
+        {
+            if (photo.type !== ProfilePhotoType.thumbnail) continue;
+
+            if (size === undefined) return photo.value;
+
+            return new URL(photo.value + `?s=${size}`);
+        }
+
+        return undefined;
     }
 }
 
 enum ProfilePhotoType {
-    thumbnail
+    thumbnail = "thumbnail"
 }
 
 class ProfilePhoto {
@@ -51,6 +82,16 @@ class ProfilePhoto {
     readonly value: URL
 
     constructor(value: URL, type?: ProfilePhotoType) {
+        this.value = value;
+        this.type = type;
+    }
+}
+
+class ProfileIM {
+    readonly type?: string;
+    readonly value: string
+
+    constructor(value: string, type: string) {
         this.value = value;
         this.type = type;
     }

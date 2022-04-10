@@ -6,7 +6,7 @@
     color: #249da9;
     background: #a92474;
 }
-  
+
 ::selection {
     color: #249da9;
     background: #a92474;
@@ -15,8 +15,10 @@
 body {
     padding-right: 0 !important
 }
-body, html {
-    font-family: Arial,sans-serif;
+
+body,
+html {
+    font-family: Arial, sans-serif;
     font-size: 15px;
     color: #666;
     height: 100%;
@@ -76,11 +78,20 @@ a {
 .p-b-10 {
     padding-bottom: 10px;
 }
-h1, h2, h3, h4, h5, h6, p {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
     margin: 0;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
     margin: 0;
     padding: 0;
     -webkit-box-sizing: border-box;
@@ -103,9 +114,11 @@ h1, h2, h3, h4, h5, h6, p {
 .p-l-15 {
     padding-left: 15px;
 }
+
 .p-b-35 {
     padding-bottom: 35px;
 }
+
 .p-t-55 {
     padding-top: 55px;
 }
@@ -281,11 +294,13 @@ h1, h2, h3, h4, h5, h6, p {
     -o-flex-direction: column;
     flex-direction: column;
 }
+
 .flex-col-c-sb {
     justify-content: space-between;
     -ms-align-items: center;
     align-items: center;
 }
+
 .flex-w {
     -webkit-flex-wrap: wrap;
     -moz-flex-wrap: wrap;
@@ -293,10 +308,26 @@ h1, h2, h3, h4, h5, h6, p {
     -o-flex-wrap: wrap;
     flex-wrap: wrap;
 }
+
 .flex-w {
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
     display: -ms-flexbox;
     display: flex;
+}
+
+i {
+    font-size: 2rem;
+}
+
+.link i {
+    color: rgba(190, 24, 93, var(--tw-bg-opacity))
+}
+
+.tippy-box[data-theme~='my-theme'] {
+    background-color: #249da9;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
 }
