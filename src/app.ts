@@ -80,19 +80,26 @@ async function RenderProductionApp() {
         "lg:my-0"
     );
 
-    const profileContainer = document.createElement("div");
+    const contentContainer = document.createElement("div");
 
-    profileContainer.id = "profile";
+    contentContainer.id = "profile-card";
+
+    contentContainer.classList.add(
+        "w-full",
+        "rounded-lg",
+        "shadow-2xl",
+        "bg-white",
+        "opacity-75",
+        "mx-auto",
+        "flex",
+        "items-center"
+    );
+
+    const profileContainer = document.createElement("div");
 
     profileContainer.classList.add(
         "w-full",
         "lg:w-3/5",
-        "rounded-lg",
-        "lg:rounded-l-lg",
-        "lg:rounded-r-none",
-        "shadow-2xl",
-        "bg-white",
-        "opacity-75",
         "mx-6",
         "lg:mx-0"
     );
@@ -173,9 +180,20 @@ async function RenderProductionApp() {
 
     const imageContainer = document.createElement("div");
 
-    imageContainer.classList.add("w-full", "lg:w-2/5");
+    imageContainer.classList.add(
+        "w-full",
+        "lg:w-2/5",
+        "mx-6",
+        "lg:mx-0"
+    );
 
-    imageContainer.innerHTML = `<img src="${profileImageUrl}" class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block">`;
+    imageContainer.innerHTML = 
+    `<div class="p-4 md:p-12">
+        <img src="${profileImageUrl}" class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block">
+    </div>`;
+
+    contentContainer.appendChild(profileContainer);
+    contentContainer.appendChild(imageContainer);
 
     const topFunctionsContainer = document.createElement("div");
 
@@ -188,17 +206,16 @@ async function RenderProductionApp() {
         "p-4"
     );
 
-    topFunctionsContainer.innerHTML = `<button class="js-change-theme focus:outline-none">🌙</button>`;
+    topFunctionsContainer.innerHTML = `<button class="js-change-theme focus:outline-none" data-tippy-content="Change Theme">🌙</button>`;
 
-    mainContainer.appendChild(profileContainer);
-    mainContainer.appendChild(imageContainer);
+    mainContainer.appendChild(contentContainer);
     mainContainer.appendChild(topFunctionsContainer);
 
     body.appendChild(mainContainer);
 
     //toggle theme
     const toggle = document.querySelector('.js-change-theme');
-    const profileSection = document.getElementById('profile');
+    const profileSection = document.getElementById('profile-card');
 
     if (toggle === null  || profileSection === null) return;
 
@@ -222,6 +239,7 @@ async function RenderProductionApp() {
 
     //tooltips
     tippy('.link', { placement: 'bottom', theme: 'my-theme' });
+    tippy('.js-change-theme', { placement: 'bottom', theme: 'my-theme' });
 }
 
 function Initialize(_: Event) {
